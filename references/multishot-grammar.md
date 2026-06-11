@@ -8,9 +8,9 @@ Label every cut explicitly — `Shot 1:` / `Shot 2:` / `Shot 3:` — in plain pr
 ## The budget [official]
 Shots cost seconds. Plan ≈4–6s per shot: two shots want ~10s, three want 12–15s. Ask for four shots in 5s and the model compresses or skips beats. `duration: auto` lets the model size the clip to the prompt's complexity — a strong default for multi-shot; set an explicit duration only when the edit demands it.
 
-## Requirements [official]
-- **Standard tier.** Fast tiers do not reliably honor multi-shot (or slow-motion or dolly moves) on the first try.
-- **10–15s or `auto`.** Multi-shot below ~10s starves the beats.
+## Requirements [official + field]
+- **Standard tier [field].** Official fal docs give fast endpoints the same schema and multi-shot support, but field reports say fast tiers do not reliably honor multi-shot (or slow-motion or dolly moves) on the first try.
+- **10–15s or `auto` [official].** Multi-shot below ~10s starves the beats.
 
 ## Timestamps: secondary, never the skeleton [official]
 Prefer `Shot N:` labels as the structure — clear and portable across surfaces. fal's reference-to-video docs additionally accept timestamp pacing phrases ("At 5 seconds…", "Cut scene to…"); use them sparingly as *hints inside* a labeled shot, never as bracketed `[0-6s]` blocks replacing the labels.

@@ -44,7 +44,7 @@ Each plain question secretly decides a production parameter the user never has t
 | 4 | What should someone feel watching it - excited, calm, moved, amused, amazed, or tense? | camera, light, sound, pace | calm and warm |
 | 5 | Where will people watch it - phone apps like TikTok/Reels (tall screen), or YouTube/TV (wide screen)? | aspect ratio, pacing | tall 9:16 |
 
-When relevant, add: `Do you have photos, clips, or sound of the real [subject]? Real material keeps the video looking like yours.` Map anything they provide to reference roles via `[ref:reference-workflow]`.
+When real material likely exists (a business, product, pet, person, or place the user owns), the reference question takes one of the five slots — swap out question 3, which defaults well: `Do you have photos, clips, or sound of the real [subject]? Real material keeps the video looking like yours.` The batch never exceeds five questions total. Map anything they provide to reference roles via `[ref:reference-workflow]`.
 
 ## Feeling-to-Film Translation
 

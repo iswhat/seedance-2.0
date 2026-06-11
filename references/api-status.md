@@ -1,7 +1,7 @@
 # Seedance 2.0 API and Platform Status
 
-last_verified: 2026-06-10
-confidence: public-source snapshot as of the verification date; per-section dates apply where noted (fal section verified 2026-06-09, earlier surface sections verified 2026-05-30); not a guarantee of access, pricing, model IDs, upload limits, authorization behavior, or regional availability on every surface
+last_verified: 2026-06-11
+confidence: public-source snapshot as of the verification date; per-section dates apply where noted (fal section re-verified 2026-06-11, earlier surface sections verified 2026-05-30); not a guarantee of access, pricing, model IDs, upload limits, authorization behavior, or regional availability on every surface
 
 ## Confirmed From Public Sources
 
@@ -23,17 +23,17 @@ confidence: public-source snapshot as of the verification date; per-section date
 - Partner workflow docs such as ComfyUI expose T2V, R2V, and FLF2V workflow vocabulary, but those docs are surface-specific.
 - Recent AV-generation benchmark papers, including AVBench and VABench, are useful for eval vocabulary around audio-video consistency, but they are not Seedance platform-access sources.
 
-## fal — Authorized Provider, Global *(added 2026-06-10; last verified 2026-06-09)*
+## fal — Authorized Provider, Global *(added 2026-06-10; fields, resolution, and pricing re-verified 2026-06-11)*
 
 **Endpoints:** `text-to-video`, `image-to-video` (start image + optional `end_image_url` for A→B), `reference-to-video` — each with a `/fast` tier.
 **Duration:** 4–15s or `auto` (model sizes to prompt complexity; multi-shot → longer). **Aspect:** 21:9 / 16:9 / 4:3 / 1:1 / 3:4 / 9:16 / auto.
 **Params (t2v):** `prompt`, `resolution`, `duration`, `aspect_ratio`, `generate_audio` (default on; **audio included at no extra generation cost**), `seed` (**reproducibility aid, not a hard lock** — output may vary even with the same seed).
 **Params (i2v):** the t2v fields plus `image_url` (start frame) and optional `end_image_url` (A→B). Do not send image fields to the t2v endpoint.
-**Params (r2v):** reference assets go in array fields — reported as `image_urls`, `video_urls`, `audio_urls` (2026-06-11, not live-verified) — do not reuse the i2v `image_url`/`end_image_url` fields for references; verify exact field names per endpoint at call time.
+**Params (r2v):** reference assets go in array fields `image_urls`, `video_urls`, `audio_urls` (verified 2026-06-11) — do not reuse the i2v `image_url`/`end_image_url` fields for references; recheck the live schema before implementation.
 **References (r2v):** @Image×9, @Video×3, @Audio×3, ≤12 files. Images JPEG/PNG/WebP ≤30 MB; videos 480–720p, combined ≤15s, <50 MB total; audio MP3/WAV ≤15 MB each, combined ≤15s; **audio requires ≥1 image or video.**
-**Resolution — open conflict:** fal's prose guide states 480p/720p only; the model + pricing pages list **1080p (~$0.682/s)** and the r2v example uses `resolution: "1080p"`. Verify per endpoint at call time.
+**Resolution (verified 2026-06-11):** standard endpoints list 480p/720p/**1080p (~$0.682/s)**; fast endpoints cap at 720p. Prose guides have lagged the schema before — verify per endpoint at call time.
 **Pricing (verify live before quoting):** 720p standard ≈$0.30/s · fast ≈$0.24/s · video-reference ×0.6 · 1080p ≈$0.682/s.
-**Prompting:** prose direction; `Shot 1:/Shot 2:` labels for multi-shot; r2v docs also accept timestamp pacing phrases as secondary hints. **Fast tier is unreliable for multi-shot / slow-mo / dolly.**
+**Prompting:** prose direction; `Shot 1:/Shot 2:` labels for multi-shot; r2v docs also accept timestamp pacing phrases as secondary hints. **Fast tier:** official fal docs give fast endpoints the same schema and multi-shot support; field reports still favor the Standard tier for multi-shot, slow motion, and dolly moves — treat that as field guidance, not provider doc.
 **No dedicated extend endpoint** — extend is a Dreamina-app feature. To continue a clip on fal, prefer reference-to-video with the previous clip as a video reference (keeps motion and audio context); chaining image-to-video from the previous clip's last frame is the fallback.
 
 ## Operational Wording
@@ -93,6 +93,9 @@ Real-person face, portrait, and voice workflows require authorization, legal/eth
 - https://developer.volcengine.com/articles/7628567056649125942
 - https://docs.byteplus.com/en/docs/ModelArk/2291680
 - https://docs.byteplus.com/en/docs/ModelArk/1099320
+- https://fal.ai/models/bytedance/seedance-2.0/text-to-video
+- https://fal.ai/models/bytedance/seedance-2.0/image-to-video
+- https://fal.ai/models/bytedance/seedance-2.0/reference-to-video
 - https://docs.dev.runwayml.com/guides/seedance/
 - https://help.runwayml.com/hc/en-us/articles/50488490233363-Creating-with-Seedance-2-0
 - https://docs.comfy.org/zh/tutorials/partner-nodes/bytedance/seedance-2-0

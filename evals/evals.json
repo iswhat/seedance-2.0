@@ -819,11 +819,11 @@
     {
       "id": "platform_spec_fal_verification",
       "prompt": "What resolution and cost is a 12s clip on fal?",
-      "expected_output": "Loads api-status, answers per endpoint with the verified date, flags the fal 480p/720p versus 1080p documentation conflict, and instructs verifying live before budgeting.",
+      "expected_output": "Loads api-status, answers per endpoint and tier with the verified date (standard up to 1080p, fast capped at 720p), and instructs verifying live before budgeting.",
       "assertions": [
         "loads api-status before quoting platform numbers",
         "states the verification date with any figure",
-        "flags the fal 1080p resolution documentation conflict",
+        "states tier-specific resolution: standard up to 1080p, fast capped at 720p",
         "does not quote any number from memory"
       ],
       "failure_mode": "platform numbers quoted from memory without a source date",
